@@ -18,7 +18,8 @@
         "esp_mac.h": "c",
         "esp_system.h": "c",
         "esp_flash.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "tcp.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "idf.flashType": "UART"

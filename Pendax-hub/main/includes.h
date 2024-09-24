@@ -13,6 +13,9 @@
 #include "nvs_flash.h"
 #include "sdkconfig.h"
 #include "lwip/sockets.h"
+#include "arpa/inet.h"
+#include "string.h"
+
 
 
 #endif 

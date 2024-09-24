@@ -1,16 +1,14 @@
 #include "TCP.h"
 
-#define UDP_SOCKET 0
-#define TCP_SOCKET 1
 
 
-void socket_create(int socket_type){
-    int socket = socket(AF_INET, socket_type == UDP_SOCKET ? SOCK_DGRAM : SOCK_STREAM, 0);
-    if(socket < 0){
+
+int socket_create(int socket_type){
+    int sock = socket(AF_INET, socket_type == UDP_SOCKET ? SOCK_DGRAM : SOCK_STREAM, 0);
+    if(sock < 0){
         ESP_LOGE("socket_create", "Failed to create socket");
-        return -1;
     }
-    return socket;
+    return sock;
 }
 
 void setup_adress(struct sockaddr_in *server_address, const char *ip, int port){
@@ -24,4 +22,12 @@ void setup_adress(struct sockaddr_in *server_address, const char *ip, int port){
         } 
         server_address->sin_addr.s_addr = htonl(INADDR_ANY);
     } 
+}
+
+void socket_bind(int socket, struct sockaddr_in *server_address, const char *device_ip){
+    setup_adress(server_address, device_ip, 8080);
+    if(bind(socket, (struct sockaddr *)server_address, sizeof(*server_address)) < 0){
+        ESP_LOGE("socket_bind", "Failed to bind socket");
+        close(socket);      
+    }
 }
