@@ -6,9 +6,18 @@
 
 void device_command(void *pvParameters)
 {
+    int socket;
+
+
     while (1)
     {
-        int socket = socket_create(TCP_SOCKET);
+        socket = socket_create(TCP_SOCKET);
+        if (socket < 0)
+        {
+            ESP_LOGE("device_command", "Error occurred during socket creation");
+            vTaskDelay(1000 / portTICK_PERIOD_MS);
+            continue;
+        }
         struct sockaddr_in server_address;
         setup_address(&server_address, device_1_ip, DEVICE_PORT);    //PORT 1986
         socket_bind(socket, &server_address, device_1_ip);
@@ -19,13 +28,14 @@ void device_command(void *pvParameters)
             ESP_LOGE("device_command", "Error occurred during connection to device 1");
             close(socket);
         }
-        else
+
+        while(1)
         {
             ESP_LOGI("device_command", "Connected to device 1");
             char *message = "TOF";
             send(socket, message, strlen(message), 0);
             ESP_LOGI("device_command", "Message sent to device 1");
-            close(socket);
+            vTaskDelay(1000 / portTICK_PERIOD_MS);
         }
     }   
 }
