@@ -3,6 +3,10 @@
 #include "wifi_code.h"
 #include "TCP.h"
 
+#define GPIO_OUTPUT_IO_0    20
+
+
+
 
 void device_command(void *pvParameters)
 {
@@ -28,14 +32,27 @@ void device_command(void *pvParameters)
             ESP_LOGE("device_command", "Error occurred during connection to device 1");
             close(socket);
         }
-
-        while(1)
-        {
             ESP_LOGI("device_command", "Connected to device 1");
             char *message = "TOF";
+            char *message2 = "TON";
+        while(1)
+        {
+           
+           
             send(socket, message, strlen(message), 0);
-            ESP_LOGI("device_command", "Message sent to device 1");
-            vTaskDelay(1000 / portTICK_PERIOD_MS);
+            ESP_LOGI("device_command", "Message OFF to device 1");
+            gpio_set_level(GPIO_OUTPUT_IO_0, 0);
+            vTaskDelay(10000 / portTICK_PERIOD_MS);
+        
+           
+
+            ESP_LOGI("device_command", "Connected to device 1");
+           
+            send(socket, message2, strlen(message2), 0);
+            gpio_set_level(GPIO_OUTPUT_IO_0, 1);
+            
+            ESP_LOGI("device_command", "Message ON to device 1");
+            vTaskDelay(10000 / portTICK_PERIOD_MS);
         }
     }   
 }
