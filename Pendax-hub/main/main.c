@@ -5,6 +5,10 @@
 
 #define GPIO_OUTPUT_IO_0    20
 
+const char *device_1_ip = "192.168.10.101";  
+const char *device_2_ip = "192.168.10.102";
+const char *device_3_ip =  "192.168.10.103";
+
 
 
 
@@ -44,8 +48,7 @@ void device_command(void *pvParameters)
             gpio_set_level(GPIO_OUTPUT_IO_0, 0);
             vTaskDelay(10000 / portTICK_PERIOD_MS);
         
-           
-
+        
             ESP_LOGI("device_command", "Connected to device 1");
            
             send(socket, message2, strlen(message2), 0);
@@ -59,11 +62,12 @@ void device_command(void *pvParameters)
 
 void app_main(void)
 {
-    esp_log_level_set("wifi", ESP_LOG_ERROR);
+        esp_log_level_set("wifi", ESP_LOG_ERROR);
+
         wifi_init_sta();
 
         xTaskCreate(&device_command, "Device_1", 4096, NULL, 5, NULL);
 
-        
+     
      
 }
