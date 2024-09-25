@@ -1,3 +1,6 @@
 build/
 sdkconfig
 sdkconfig.old
+c_cpp_properties.json
+tasks.json
+launch.json
