@@ -1,6 +1,97 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+# ESP-IDF build output
+/build/
+*.elf
+*.bin
+*.map
+*.ld
+
+# ESP-IDF-specific files
+/partition_table/
+/sdkconfig
+/sdkconfig.old
+*.log
+
+# Python virtual environments (venv)
+venv/
+.venv/
+env/
+.env/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore IDF toolchain files
+.espressif/
+components/
+tools/
+
+# VSCode project files (if using it)
+.vscode/
 build/
-sdkconfig
-sdkconfig.old
-c_cpp_properties.json
-tasks.json
-launch.json
+
+# Ignore CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Ignore other IDE or editor settings
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
